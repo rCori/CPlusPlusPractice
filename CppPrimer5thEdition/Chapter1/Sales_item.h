@@ -23,10 +23,24 @@
 class Sales_item{
 public:
 
+	//I must create some kind of constructor although in my example all
+	//instances will come from the >> operator
+	Sales_item();
+
+	//Since all of these overloads require access to private members
+	//of the Sales_item class, we declare them all 
 	friend std::ostream& operator<<(std::ostream &lhs, const Sales_item &rhs);
 	friend std::istream& operator>>(std::istream &lhs, Sales_item &rhs);
-	friend Sales_item operator+(const Sales_item &rhs);
-
+	//+ operator actually can be implemented as a member function by
+	//removing one of the operands. Compiler then turns the *this
+	//pointer into a hidden leftmost operator.
+	//Chose not to do that
+	friend Sales_item operator+(const Sales_item &lhs, const Sales_item &rhs);
+	std::string isbn();
+private:
+	std::string isbnString;
+	int copiesSold;
+	float price;
+	float revenue;
 };
-
 #endif
