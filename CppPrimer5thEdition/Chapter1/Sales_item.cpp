@@ -23,6 +23,10 @@ std::istream& operator>>(std::istream &lhs, Sales_item &rhs){
 
 Sales_item operator+(const Sales_item &lhs, const Sales_item &rhs){
 	Sales_item salesItem;
+	salesItem.isbnString = lhs.isbnString;
+	salesItem.revenue = (lhs.copiesSold * lhs.price) + (rhs.copiesSold * rhs.price);
+	salesItem.copiesSold = lhs.copiesSold + rhs.copiesSold;
+	salesItem.price = salesItem.revenue/salesItem.copiesSold;
 	return salesItem;
 }
 
