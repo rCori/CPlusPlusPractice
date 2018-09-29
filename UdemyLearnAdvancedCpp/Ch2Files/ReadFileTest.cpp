@@ -23,17 +23,27 @@ int main(){
 		//we put '-' between data name and value
 		getline(input, line, '-');
 		
-
 		//C++ cannot use a string in a switch case so we must
 		//cascade if statements using the compare function
 		//on the expected names to print out the values correctly
-		if(line.compare("Level") != 0){
+		if(line.compare("Level") == 0){
 			int level;
 			input >> level;
 			std::cout << "This character has reached the level of " 
 				<< level << std::endl;
-		} else if(line.compare("Name")){
-		} else if(line.compare("Gold")){
+		} else if(line.compare("Name") == 0){
+			std::string name;
+			input >> name;
+			std::cout << "The character's name is " << name
+				<< std::endl;
+		} else if(line.compare("Gold") == 0){
+			int gold;
+			input >> gold;
+			std::cout << "Character is holding " << 
+				gold << " gold" << std::endl;
 		}
+		input >> std::ws;
 	}
+	input.close();
+	return 0;
 }
