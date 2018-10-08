@@ -3,7 +3,6 @@
  * 1. Read character data from a text file 
  * 2. Write it to a binary file
  * 3. Read that binary back out to console
- *
  */
 
 #include <iostream>
@@ -20,6 +19,8 @@ struct PlayerData {
 
 
 int main(){
+	
+	/** 1. Read character data from a text file */ 
 	std::string fileName = "playerData.txt";
 
 	//For the sake of example we will use an fstream and open
@@ -64,6 +65,8 @@ int main(){
 	}
 	input.close();
 
+
+ 	/** 2. Write it to a binary file */
 	std::string binaryFileName = "playerCharacter.bin";
 
 	std::fstream binaryOutputFile;
@@ -98,14 +101,12 @@ int main(){
 		sizeof(PlayerData));
 	binaryInputFile.close();
 
+	//Write data from PlayerData struct we just read from the binary file
 	std::cout << "From the binary file saved we have:" << std::endl;
 	std::cout << "Character's name is " << otherPlayerData.name 
 		<< std::endl;
 	std::cout << "Character's has " << otherPlayerData.gold
 		<< " gold" << std::endl;
 	std::cout << "Character has attained level " 
-		<< otherPlayerData.level << std::endl; 
-
-
-	
+		<< otherPlayerData.level << std::endl; 	
 }

@@ -51,7 +51,7 @@ int main(){
 	
 	//After adding an additional value this changes
 	//We can use std::vector<>.push_back to add elements
-	//to a vector
+	//to the end vector
 	initializeVector.push_back(2);
 
 	std::cout << "Capacity of initializeVector is " 
@@ -59,4 +59,26 @@ int main(){
 			"of initializeVector is "
 			<< initializeVector.size() << std::endl;
 	
+	//pop_back will remove and return off the end of the vector
+	std::cout << "The last element of initialize vector before "
+			"pop_back is " << initializeVector.back()
+			<< std::endl;
+	initializeVector.pop_back();
+	std::cout << "After pop_back the last element is: "
+			<< initializeVector.back() << std::endl;
+
+	//Using an iterator to iterate through a vector
+	std::vector<int> inOrderVector;
+	int initArray[] = {0,1,2,3,4,5,6};
+	inOrderVector.insert(inOrderVector.begin(),initArray,initArray+7);
+
+	//The simplest standard for loop
+	std::cout << "Iterating through vector using standard "
+		   "iterator techniques." << std::endl;
+	for(std::vector<int>::iterator it = inOrderVector.begin(); it != inOrderVector.end(); it++){
+		//We use std::vector's overloaded dereference operator * to get the object
+		//that our iterator points to, in our case these will be integers
+		std::cout << *it << std::endl;
+	}
+
 }
