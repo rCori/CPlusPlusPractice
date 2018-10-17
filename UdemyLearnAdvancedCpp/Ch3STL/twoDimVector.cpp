@@ -3,7 +3,7 @@
  * flexibility of templace types in stl to make
  * a vector of vectors, or a two-dimensional
  * vectors. They can be used like two-dimensional
- * arrays can, except
+ * arrays can
  */
 
 #include <iostream>
