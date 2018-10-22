@@ -8,6 +8,10 @@
 #include <iostream>
 #include <map>
 
+/*
+ * Basic class to demonstrate a custom type as a value in
+ * a map
+ */
 class User
 {
 private:
@@ -17,14 +21,13 @@ public:
 	//Constructors using initializer lists
 	User():name(""),age(0){};
 	User(std::string _name,int _age):name(_name),age(_age){};
-
+	
+	//Simple getters and setters
 	std::string GetName(){ return name; };
 	int GetAge(){ return age; };
-
 	void SetName(std::string name){
 		this->name = name;
 	}
-
 	void SetAge(int age){
 		this->age = age;
 	}
@@ -48,6 +51,9 @@ int viewUser(std::map<int,User>& userMap){
 		if(userIDStr.compare("exit") == 0){
 			return 0;
 		}
+		//This try-catch block handles the case that the
+		//user has not entered something can be converted
+		//to a proper integer
 		try{
 			userID = std::stoi(userIDStr);
 			//Ensure the usedID exists
@@ -61,6 +67,12 @@ int viewUser(std::map<int,User>& userMap){
 			std::cout << "Invalid Command" << std::endl;
 		}
 	}
+	//Get the user from the map and print out it's information
+	//std::map can be accessed with the [] operator overloaded
+	//so it behaves like an array would. We are using integers
+	//as keys but unlike an array they do not define an ordering
+	//or map location. Value at key "1" should not be thought of
+	//as "next to 2"
 	User& user = userMap[userID];
 	std::cout << "User Name: " << user.GetName() << std::endl;
 	std::cout << "User Age: " << user.GetAge() << std::endl;
@@ -74,6 +86,7 @@ int viewUser(std::map<int,User>& userMap){
  * the UserID and age
  */
 int addUser(std::map<int,User>& userMap){
+	//Print prompt to user
 	std::cout << "Adding game:" << std::endl;
 	std::cout << "Enter UserID:" << std::endl;
 	//Need a valid positive integer and a userID that is not used
@@ -82,9 +95,13 @@ int addUser(std::map<int,User>& userMap){
 	while(!acceptedID){
 		std::string userIDStr;
 		std::cin >> userIDStr;
+		//This try-catch block handles the case that the
+		//user has not entered something can be converted
+		//to a proper integer
 		try{
 			userID = std::stoi(userIDStr);
 			//Is this userID positive and unique
+			//If not a different userID will be needed
 			if(userID < 1){
 				std::cout << "UserID must be positive" << std::endl;
 				continue;
@@ -111,6 +128,9 @@ int addUser(std::map<int,User>& userMap){
 	while(!acceptedAge){
 		std::string ageStr;
 		std::cin >> ageStr;	
+		//This try-catch block handles the case that the
+		//user has not entered something can be converted
+		//to a proper integer
 		try{
 			age = std::stoi(ageStr);
 			acceptedAge = true;
@@ -118,9 +138,10 @@ int addUser(std::map<int,User>& userMap){
 			std::cout << "Invalid Command" << std::endl;
 		}
 	}
-	//Finally create the User and add it to the
+	//Finally create the User and add it to the map
+	//We can add to a std::map the same we assign a value
+	//in an array with the [] operator overloaded
 	userMap[userID] = User(name,age);
-
 	return 0;	
 }
 
@@ -130,6 +151,7 @@ int addUser(std::map<int,User>& userMap){
  * the UserID and age
  */
 int editUser(std::map<int,User>& userMap){
+	//Print prompt to the user
 	std::cout << "Editing game:" << std::endl;
 	std::cout << "Enter UserID:" << std::endl;
 	//Need a valid positive integer and a userID that is not used
@@ -138,6 +160,9 @@ int editUser(std::map<int,User>& userMap){
 	while(!acceptedID){
 		std::string userIDStr;
 		std::cin >> userIDStr;
+		//This try-catch block handles the case that the
+		//user has not entered something can be converted
+		//to a proper integer
 		try{
 			userID = std::stoi(userIDStr);
 			if(userMap.find(userID) == userMap.end()){
@@ -150,6 +175,8 @@ int editUser(std::map<int,User>& userMap){
 			std::cout << "Invalid Command" << std::endl;
 		}
 	}
+	//Get the selected User(class) from the map so the
+	//user(individual at computer) can see what he/she is editing
 	User& user = userMap[userID];
 	std::cout << "User Name: " << user.GetName() << std::endl;
 	std::cout << "User Age: " << user.GetAge() << std::endl;
@@ -166,6 +193,9 @@ int editUser(std::map<int,User>& userMap){
 	while(!acceptedAge){
 		std::string ageStr;
 		std::cin >> ageStr;
+		//This try-catch block handles the case that the
+		//user has not entered something can be converted
+		//to a proper integer
 		try{
 			age = std::stoi(ageStr);
 			acceptedAge = true;
@@ -183,6 +213,8 @@ int editUser(std::map<int,User>& userMap){
  * User can exit before entering a userID by entering "exit"
  */
 int deleteUser(std::map<int,User>& userMap){
+	//Print prompt to the user telling them to enter a UserID
+	//and that "exit" will bring them out
 	std::cout << "Enter a UserID to view" << std::endl;
 	std::cout << "Type \"exit\" to go back to previous menu" << std::endl;
 	//Need a valid positive integer and a userID that is not used
@@ -195,6 +227,9 @@ int deleteUser(std::map<int,User>& userMap){
 		if(userIDStr.compare("exit") == 0){
 			return 0;
 		}
+		//This try-catch block handles the case that the
+		//user has not entered something can be converted
+		//to a proper integer
 		try{
 			userID = std::stoi(userIDStr);
 			//Ensure the usedID exists
@@ -208,6 +243,8 @@ int deleteUser(std::map<int,User>& userMap){
 			std::cout << "Invalid Command" << std::endl;
 		}
 	}
+	//std::map::erase removes an element, both key and value
+	//from a map by key.
 	userMap.erase(userID);
 	return 0;
 }
@@ -246,6 +283,7 @@ int readCommand(int command, std::map<int,User>& userMap){
 }
 
 int main(){
+	//Define the map we will use everywhere with pass-by-reference
 	std::map<int, User> userMap;
 	int status = 0;
 	while(status != 1){
@@ -257,6 +295,9 @@ int main(){
 		std::cout << "5: Exit program" << std::endl;
 		std::string command;
 		std::cin >> command;
+		//We use a try-catch to handle the case of the
+		//user not entering something that can be cleanly
+		//converted to an int
 		try{
 			int cmdInt = std::stoi(command);
 			status = readCommand(cmdInt,userMap);
