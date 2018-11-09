@@ -52,6 +52,9 @@ string Enemy::GetName() const {
 
 int Enemy::DoDamage(int playerHealth) const{
 	int newPlayerHealth = playerHealth - damage;
+	std::cout << "Player is attacked by " << name
+			<< " taking " << damage << " points of damage"
+			<< endl;
 	if(newPlayerHealth <= 0){
 		cout << "Player has died" << endl;
 	}
@@ -61,6 +64,9 @@ int Enemy::DoDamage(int playerHealth) const{
 
 int Enemy::TakeDamage(int playerDamage){
 	health -= playerDamage;
+	cout << "Player does " << playerDamage << " damage to "
+			<< name << " with " << health << " health points remaining"
+			<< endl;
 	if(health <= 0){
 		cout << name << " has been slain" << endl;
 	}
@@ -70,7 +76,7 @@ int Enemy::TakeDamage(int playerDamage){
 ostream &operator<<(ostream &out, const Enemy &c){
 	out << c.name << " has " << c.health << "/" 
 			<< c.startingHealth << " and has damage level "
-			<< c.damage << endl;
+			<< c.damage;
 	
 	return out;
 }
