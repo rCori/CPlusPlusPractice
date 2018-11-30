@@ -12,6 +12,12 @@ int main(){
 	textring.add("three");
 	textring.add("four");
 
+	for(ring<string>::iterator it=textring.begin(); it != textring.end(); it++){
+		cout << *it << endl;
+	}
+
+	cout << endl;
+
 	for(int i = 0; i < textring.size(); i++){
 		cout << textring.get(i) << endl;
 	}
